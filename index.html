@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<link href="misc/favicon.ico" rel="icon" />
+<link href="misc/favicon.ico" rel="shortcut icon" />
+
+<link rel="stylesheet" type="text/css" href="misc/init.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="misc/photo.css" />
+
+<script type="text/javascript" src="misc/util.js"></script>
+<script type="text/javascript"> 
+<!--
+function initPageAccueil(){
+initPage();
+
+if (document.images) {
+	 var menuWeb = document.getElementById('menuWeb');
+     var img = new Image();
+     img.onload = function() {
+		var imgA = document.getElementById('imgAccueil');
+		imgA.src = img.src;
+		menuWeb.style.visibility = 'visible';
+  };
+  img.onerror = function() {
+// doesn't exist or error loading
+ };
+ img.src = 'http://cdore.dyndns.org/rachel/misc/Salon-Cliche-web.jpg';
+}
+}
+// -->
+</script> 
+</head>
+
+<body onload="initPageAccueil();">
+
+<div id="entete">
+<h1>80 <SUP>i&egrave;me</SUP> anniversaire de Rachel</h1>
+</div>
+
+<div id="divmenu">
+<ul>
+	<li>
+	<a class="selOpt" href="#">Accueil</a>
+	</li>
+	<li>
+	<a href="diapo.html">Diaporama</a>
+	</li>
+	<li>
+	<a id="ancPhoto" href="galerie.html">Photos</a>
+	</li>
+	<li>
+	<a href="chansons.html">Chansons</a>
+	</li>
+	<li>
+	<a target="_blank" href="https://www.dropbox.com/sh/0dakd8kz20t15ro/gg3lKUwFYo">Soir&eacute;e</a>
+	</li>
+<div id="menuWeb">
+	<li>
+	<a target="_blank" href="http://cdore.dyndns.org/Rachel/default.html">Version Web</a>
+	</li>
+</div>
+</ul>
+</div>
+
+<div id="content">
+
+<div id="contentDesc"><p>L'&eacute;v&eacute;nement fut c&eacute;l&eacute;br&eacute; avec un souper de famille pour l'occasion, la veille, au Château Bonne Entente</p></div>
+
+<div><img id="imgAccueil" width="90%" src="misc/Salon-Cliche.jpg" alt=""/></div>
+ 
+
+</div>  <!--End content // -->
+
+<div id="piedPage">
+16 f&eacute;vrier 2014
+<button type="button" id="rightnav" title="Taille de police" onclick="changeTaille();"><img id="imgTaille" alt="Taille de police" height="20" width="45" src="misc/taille.png" /></button>
+</div>
+
+
+ </body>	 
+ </html>

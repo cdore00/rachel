@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<link href="misc/favicon.ico" rel="icon" />
+<link href="misc/favicon.ico" rel="shortcut icon" />
+
+<link rel="stylesheet" type="text/css" href="misc/init.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="misc/photo.css" />
+
+<script type="text/javascript" src="misc/util.js"></script>
+<script type="text/javascript"> 
+<!--
+
+var UniqueID = 314 // Make each link open in a new window
+var newWinOffset = 0 // Position of first pop-up
+var PlayWin = null;
+var palyer5Support = false;
+var itemID = 1;
+var currentList = 'songListR';
+var hdlTimer = null;
+
+function PlayerOpen2(soundfilepath) {
+if (PlayWin != null){
+PlayWin.close();
+	PlayWin = null;
+	
+	}
+PlayWin = window.open(soundfilepath,UniqueID,'width=320,height=190,top=0,left=0,resizable=0,scrollbars=0,titlebar=0,toolbar=0,menubar=0,status=0,directories=0,personalbar=0');
+PlayWin.focus();
+UniqueID = UniqueID + 1;
+}
+
+function PlayerOpen(soundfilepath) {
+//alert("play " + soundfilepath);
+if (PlayWin != null){
+PlayWin.close();
+	PlayWin = null;
+	}
+PlayWin = window.open('',UniqueID,'width=320,height=190,top=' + newWinOffset +',left=0,resizable=0,scrollbars=0,titlebar=0,toolbar=0,menubar=0,status=0,directories=0,personalbar=0');
+PlayWin.focus();
+
+var winContent = "<HTML><HEAD></HEAD><BODY bgcolor='#cccccc'>";
+winContent += "<B style='font-size:18px;font-family:Verdana,sans-serif;line-height:1.5'>" + soundfilepath + "</B>";
+
+winContent += "<OBJECT width='300' height='42'>";
+winContent += '<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />';
+winContent += "<param name='SRC' value='" + soundfilepath + "'>";
+winContent += "<param name='AUTOPLAY' VALUE='true'>";
+winContent += "<param name='CONTROLLER' VALUE='true'>";
+winContent += "<param name='BGCOLOR' VALUE='#cccccc'>";
+winContent += "<EMBED SRC='" + soundfilepath + "' AUTOSTART='TRUE' LOOP='FALSE' WIDTH='300' HEIGHT='42' CONTROLLER='TRUE' BGCOLOR='#cccccc'></EMBED>";
+winContent += "</OBJECT>";
+winContent += "<p style='font-size:12px;font-family:Verdana,sans-serif;text-align:center'><a href='" + soundfilepath +"'>T&eacute;l&eacute;charger</a></p>";
+winContent += "<FORM><DIV align='center'><INPUT type='button' value='Fermer' onclick='javascript:window.close();'></DIV></FORM>";
+winContent += "</BODY></HTML>";
+
+PlayWin.document.write(winContent);
+PlayWin.document.close(); // "Finalizes" new window
+UniqueID = UniqueID + 1 // newWinOffset = newWinOffset + 20 // subsequent pop-ups will be this many pixels lower
+//alert('play fin: ' + soundfilepath);
+}
+
+
+function playsong(aObj, fichier, titre){
+var player5 = document.getElementById('player5');
+var divPlayer = document.getElementById('divPlayer');
+var audio5support = false;
+
+hdlTimer = null;
+
+if (palyer5Support){
+	if (player5.error != null)
+		alert(player5.error);
+
+itemID = findIndex(aObj.parentNode);
+currentList = aObj.parentNode.parentNode.id;
+
+	aObj.parentNode.appendChild(divPlayer);
+	divPlayer.scrollIntoView (false);
+	//document.body.insertBefore(divPlayer, aObj);
+
+	if ( player5.canPlayType ) {
+		audio5support = true;
+	}
+	//if (window.HTMLAudioElement) {
+	//alert(player5.src);
+	if (!audio5support)
+		PlayerOpen(fichier);
+	else{
+	   try {
+			player5.src = fichier;
+			player5.load();
+			hdlTimer = setTimeout(function() {veriv(fichier, 0,titre );}, 50);
+	   }
+		catch (e) {
+			// Fail silently but show in F12 developer tools console
+			 if(window.console && console.error("Error:" + e));
+				alert('Erreur'); //PlayerOpen(fichier);
+	   }
+	}
+}else{
+PlayerOpen(fichier);
+}
+
+}
+
+function veriv(fich, cnt, titre){
+var player5 = document.getElementById('player5');
+var playStatus = document.getElementById('playStatus');
+var stateDesc = '';
+
+switch(player5.readyState)
+{
+case 0:
+  stateDesc = 'En attente';
+  break;
+case 1:
+  stateDesc = 'Chargement...';
+  break;
+case 2:
+  stateDesc = 'Chargement en cours';
+  break;
+case 3:
+  stateDesc = 'Pr&ecirc;t &agrave; jouer';
+  break;
+case 4:
+  stateDesc = titre;
+  break;
+}
+//alert(player5.readyState);
+
+playStatus.innerHTML = stateDesc;
+//player5.networkState + 'R' + player5.readyState;
+if (player5.readyState == 4){
+	player5.play();
+	//alert(player5.duration);
+}else{
+	if (cnt > 100 && player5.readyState == 0){
+		var divPlayer = document.getElementById('divPlayer');
+		divPlayer.parentNode.removeChild(divPlayer);
+		palyer5Support = false;
+		PlayerOpen(fich);
+	}else{
+	//alert("Wait");
+		hdlTimer = setTimeout(function() {veriv(fich, cnt + 1, titre);}, 500);
+	}
+}
+
+}
+
+function testAudioSupport(){
+var myAudio = document.createElement('audio');
+
+      if (myAudio.canPlayType) {
+          // CanPlayType returns maybe, probably, or an empty string.
+          if ( "" != myAudio.canPlayType('audio/mpeg')) {
+              alert("mp3 supported");
+          }
+
+          if ( "" != myAudio.canPlayType('audio/ogg; codecs="vorbis"')) {
+              alert("ogg supported");
+          }
+
+         if ( "" != myAudio.canPlayType('audio/mp4; codecs="mp4a.40.5"')) {
+              alert("aac supported");
+          }
+      }else {
+         alert("no audio support");
+      }
+}
+
+function testAudio(cnt){
+var divPlayer = document.getElementById('divPlayer');
+var player5 = document.getElementById('player5');
+
+	if (player5.networkState > 1){
+		palyer5Support = true;
+		player5.controls = true;
+		divPlayer.style.visibility='visible';
+		    player5.onloadedmetadata = function(e) {
+			  //alert("Wait yes onloadedmetadata");
+			};
+	}else{
+		if (cnt < 20)
+			hdlTimer = setTimeout(function() {testAudio(cnt + 1);}, 200);
+		else{
+		alert("Wait no2");
+			clearAudio();
+			}
+	}
+}
+
+function clearAudio(){
+var divPlayer = document.getElementById('divPlayer');
+divPlayer.parentNode.removeChild(divPlayer);
+
+}
+
+function initialisePage(){
+var player5 = document.getElementById('player5');
+
+if ( "" != player5.canPlayType('audio/mpeg')) {
+//alert("Wait yes");
+	player5.load();
+}else{
+//alert("Wait no");
+	clearAudio();
+}	
+
+initPage();
+testAudio(0);
+}
+
+
+function pnext(whatNext){
+var songList = document.getElementById(currentList);
+
+//alert(songList.childNodes[itemID].firstChild);
+	if (itemID + whatNext >= 1 && itemID + whatNext <= songList.childNodes.length){ 
+		itemID += whatNext; 
+		songList.childNodes[itemID].firstChild.click();
+//	songList.childNodes[itemID].firstChild.focus();
+	}
+}
+
+
+function nextPlay(){
+pnext(2);
+}
+
+function loadedmetadata(){
+
+}
+
+// -->
+</script> 
+</head>
+
+<body onload="initialisePage()">
+
+<div id="entete">
+<h1>80 <SUP>i&egrave;me</SUP> anniversaire de Rachel</h1>
+<button type="button" id="rightnav" title="Taille de police" onclick="changeTaille();"><img id="imgTaille" alt="Taille de police" height="20" width="45" src="misc/taille.png" /></button>
+</div>
+
+<div id="divmenu">
+<ul>
+	<li>
+	<a href="index.html">Accueil</a>
+	</li>
+	<li>
+	<a href="diapo.html">Diaporama</a>
+	</li>
+	<li>
+	<a id="ancPhoto" href="galerie.html">Photos</a>
+	</li>
+	<li>
+	<a class="selOpt" href="#">Chansons</a>
+	</li>
+
+</ul>
+</div>
+
+<div id="content">
+<h2>Chansons</h2>
+</br>
+
+<div id="divPlayer">
+<span id="playStatus"></span>
+<div id="controlBlock">
+<div id="Lnext"><a class="playControl" onclick="pnext(-2); return false;">&laquo;</a></div>
+<div id="Rnext"><a class="playControl" onclick="pnext(2); return false;">&raquo;</a></div>
+<div id="playObj">
+<audio id="player5" onended="nextPlay();">
+<source src="Music/Rachel/Ma Jeunesse - Gilles Vigneault.mp3" onerror="failed(event)" onloadedmetadata="loadedmetadata()">
+<!--<source src="misc/0003.mp3" onerror="failed(event)"/>// -->
+Votre navigateur ne supporte pas cet element audio, essayons une autre option...
+</audio>
+</div>
+
+</div>
+</div>
+
+</br></br>
+
+<h3>Rachel</h3>
+<ul id="songListR" class="songList">
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Rachel/Ma Jeunesse - Gilles Vigneault.mp3','Ma jeunesse'); return false;">Ma jeunesse - Gilles Vigneault</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Rachel/Si mes vers avaient des ailes - Reynaldo Hahn.mp3','Si mes vers avaient des ailes'); return false;">Si mes vers avaient des ailes - Reynaldo Hahn</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Rachel/Après un rêve - Gabriel Fauré.mp3','Après un rêve'); return false;">Après un rêve - Gabriel Fauré</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Rachel/La maison grise - André Messager.mp3','La maison grise'); return false;">La maison grise - André Messager</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Rachel/Un jour un enfant - Emil Stern.mp3','Un jour un enfant'); return false;">Un jour un enfant - Emil Stern</a></li>
+</ul>
+<a target="_blank" href="paroles.html">[Paroles]</a>
+</br></br></br>
+<h3>1931-1961</h3>
+<ul id="songList1940" class="songList">
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Lucienne Boyer - Parlez moi d_amour - 1931.mp3','Parlez moi d\'amour'); return false;">Lucienne Boyer - Parlez moi d&apos;amour - 1931</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Maurice Chevalier - Valentine - 1935.mp3','Valentine'); return false;">Maurice Chevalier - Valentine - 1935</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Ray Ventura - Madame la marquise - 1936.mp3','Madame la marquise'); return false;">Ray Ventura - Madame la marquise - 1936</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Glenn Miller - In the Mood - 1939.mp3','In the Mood'); return false;">Glenn Miller - In the Mood - 1939</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Artie Shaw - Frenesi - 1941.mp3','Frenesi'); return false;">Artie Shaw - Frenesi - 1941</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Alys Robi - Tico-Tico - 1942.mp3','Tito-Tito'); return false;">Alys Robi - Tito-Tito - 1942</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Bing Crosby - Swinging On A Star.mp3','Swinging On A Star'); return false;">Bing Crosby - Swinging On A Star - 1943</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Alys Robi - Besame Mucho - 1944.mp3','Besame Mucho'); return false;">Alys Robi - Besame Mucho - 1944</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Tommy Dorsey - Boogie Woogie - 1945.mp3','Boogie Woogie'); return false;">Tommy Dorsey - Boogie Woogie - 1945</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - la_vie_en_rose.mp3','La vie en rose'); return false;">&Eacute;dith Piaf - La vie en rose - 1946</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles Trenet - La mer - 1946.mp3','La mer'); return false;">Charles Trenet - La mer - 1946</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Yves Montand - Jacques Prévert - Les feuilles mortes - 1946.mp3','Les feuilles mortes'); return false;">Yves Montand - Jacques Prévert - Les feuilles mortes - 1946</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Louis Armstrong - C_est si bon - 1947.mp3','C\'est si bon'); return false;">Louis Armstrong - C&apos;est si bon - 1947</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Pee Wee Hunt - Twelfth Street Rag - 1948.mp3','Twelfth Street Rag'); return false;">Pee Wee Hunt - Twelfth Street Rag - 1948</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Hymne a l_amour.mp3','Hymne &agrave; l\'amour'); return false;">&Eacute;dith Piaf - Hymne &agrave; l&apos;amour - 1950</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Nat King Cole - Mona Lisa - 1950.mp3','Mona Lisa'); return false;">Nat King Cole - Mona Lisa - 1950</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles Trenet - L_ame des poetes - 1951.mp3','L\'âme des po&egrave;tes'); return false;">Charles Trenet - L&apos;&acirc;me des po&egrave;tes - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/F&eacute;lix Leclerc - Moi mes souliers - 1951.mp3','Moi mes souliers'); return false;">F&eacute;lix Leclerc - Moi mes souliers - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Luis Mariano - Mexico - 1951.mp3','Mexico'); return false;">Luis Mariano - Mexico - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Padam Padam .mp3','Padam Padam '); return false;">&Eacute;dith Piaf - Padam Padam - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Line Renaud - Ma p_tite folie - 1952.mp3','Ma p\'tite folie'); return false;">Line Renaud - Ma p&apos;tite folie - 1952</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Leroy Anderson - Blue Tango - 1952.mp3','Blue Tango'); return false;">Leroy Anderson - Blue Tango - 1952</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Percy Faith Orch - Moulin Rouge 1953.mp3','Moulin Rouge'); return false;">Percy Faith - Moulin Rouge - 1953</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Le Goulante de pauvre Jean.mp3','Le Goulante de pauvre Jean'); return false;">&Eacute;dith Piaf - Le Goulante de pauvre Jean - 1954</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Sous le ciel de Paris.mp3','Sous le ciel de Paris'); return false;">&Eacute;dith Piaf - Sous le ciel de Paris - 1954</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Ella Fitzgerald - Summertime - 1955.mp3','Summertime'); return false;">Ella Fitzgerald - Summertime - 1955</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Danielle Darieux  - Le Temps Du Muguet - 1955.mp3','Le temps du muguet'); return false;">Danielle Darieux  - Le temps du muguet - 1955</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Perez Prado - Cherry Pink and Apple Blossom White -  1955.mp3','Cherry Pink and Apple Blossom White'); return false;">Perez Prado - Cherry Pink and Apple Blossom White -  1955</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Doris Day - Whatever Will Be Will Be (Que Sera Sera) - 1956.mp3','Que Sera Sera'); return false;">Doris Day - Que Sera Sera - 1956</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Raymond Lévesque - Quand les hommes vivront d amour - 1956.mp3','Quand les hommes vivront d\'amour'); return false;">Raymond Lévesque - Quand les hommes vivront d&apos;amour - 1956</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/elvispresley-heartbreakhotel - 1956.mp3','Heartbreak Hotel'); return false;">Elvis Presley - Heartbreak Hotel - 1956</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Elvis Presley - All Shook Up - 1957.mp3','All Shook Up'); return false;">Elvis Presley - All Shook Up - 1957</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Les compagnons de la chanson - Nick Nack Paddy Whack - 1957.mp3','Nick Nack Paddy Whack'); return false;">Les compagnons de la chanson - Nick Nack Paddy Whack - 1957</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Pat Boone - Love Letters In the Sand - 1957.mp3','Love Letters in the Sand'); return false;">Pat Boone - Love Letters In the Sand - 1957</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Patachou - Sous Les Ponts De Paris - 1958.mp3','Sous les ponts de Paris'); return false;">Patachou - Sous les ponts de Paris - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Everly Brothers - All I Have To Do Is Dream - 1958.mp3','All I Have To Do Is Dream'); return false;">Everly Brothers - All I Have To Do Is Dream - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Domenico_Modugno-Volare - 1958.mp3','Volare'); return false;">Domenico Modugno - Volare - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith piaf - Mon manege a moi.mp3','Mon man&egrave;ge &agrave; moi'); return false;">&Eacute;dith Piaf - Mon man&egrave;ge &agrave; moi - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Lloyd Price-Personality - 1959.mp3','Personality'); return false;">Lloyd Price - Personality - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Bourvil - Salade de Fruits - 1959.mp3','Salade de fruits'); return false;">Bourvil - Salade de fruits - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Paul Anka - Lonely Boy - 1959.mp3','Lonely Boy'); return false;">Paul Anka - Lonely Boy - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Milord.mp3',''); return false;">&Eacute;dith Piaf - Milord - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Frankie Avalon - Venus - 1959.mp3','Venus'); return false;">Frankie Avalon - Venus - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Bobby Darin - Mack the Knife - 1959.mp3','Mack the Knife'); return false;">Bobby Darin - Mack the Knife - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Clauce L&eacute;veill&eacute;e - Fr&eacute;d&eacute;ric - 1960.mp3','Fr&eacute;d&eacute;ric'); return false;">Clauce L&eacute;veill&eacute;e - Fr&eacute;d&eacute;ric - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Petula Clark - Sailor - 1960.mp3','Sailor'); return false;">Petula Clark - Sailor - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles aznavour - Je M_voyais D&eacute;j&agrave; - 1960.mp3','Je M\'voyais D&eacute;j&agrave;'); return false;">Charles Aznavour - Je M'voyais D&eacute;j&agrave; - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith_Piaf_-_C_est_l_amour.mp3',' C\'est l\'amour '); return false;">&Eacute;dith Piaf - C'est l&apos;amour - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Clauce L&eacute;veill&eacute;e - Les Vieux Pianos - 1960.mp3','Les Vieux Pianos'); return false;">Clauce L&eacute;veill&eacute;e - Les Vieux Pianos - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Non, je ne regrette rien.mp3','Non, je ne regrette rien'); return false;">&Eacute;dith Piaf - Non, je ne regrette rien - 1961</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles aznavour - Les Com&eacute;diens - 1961.mp3','Les Com&eacute;diens'); return false;">Charles Aznavour - Les Com&eacute;diens - 1961</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'Music/Frida Boccara - Cherbourg avait raison - 1961.mp3','Cherbourg avait raison'); return false;">Frida Boccara - Cherbourg avait raison - 1961</a></li>
+
+</ul>
+</br>
+
+</div>  <!--End content // -->
+
+<div id="piedPage">
+16 f&eacute;vrier 2014
+</div>
+
+
+ </body>	 
+ </html>
