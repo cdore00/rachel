@@ -35,8 +35,9 @@ if ( objMovie.canPlayType ) {
 }
 //alert(mpeg4);
 
-if (canPlay && mpeg4){
+if (canPlay){
 objMovie.controls = true;
+objMovie.play();
 }else{
 objMovie.parentNode.removeChild(objMovie);
 }
@@ -80,25 +81,23 @@ objMovie.parentNode.removeChild(objMovie);
 <div id="imgDesc">Pr&eacute;sentation au d&eacute;but du souper</div>
 
 <video id="objMovie" preload  onerror="failed(event)">
-	<source src="diapo/Rachel80.mp4" type='video/mp4;' onerror="failed(event)"/>
+	<source src="https://www.dropbox.com/s/jtdi9n9w02rqjq2/Rachel80.mp4?dl=1" type='video/mp4;' onerror="failed(event)"/>
 </video>
 
 </br>
 <a target="_blank" href="texte.html">Texte du diaporama</a>
 </br></br>
-Versions:
+T&eacute;l&eacute;charger:
 </br>
-<a target="_blank" href="diapo/Rachel80.mp4">.mp4 480x320 46 Mo</a>
+<a target="_blank" href="https://www.dropbox.com/s/jtdi9n9w02rqjq2/Rachel80.mp4?dl=1">.mp4 480x320 46 Mo</a>
 </br>
+<!--
 <a target="_blank" href="diapo/Rachel80.mpg">.mpg 1440x1080 115 Mo</a>
 </br>
 <a target="_blank" href="diapo/Rachel80.mov">.mov 640x480 40 Mo</a>
 </br>
 
 </br>
-</br>
-<a target="_blank" href="texte_Mely.html">Texte de Mélyssa, apr&egrave;s le souper</a>
-</br></br>
 
     <!--<video src="misc/video_diapo.mp4" controls></video> // -->
 </div>
