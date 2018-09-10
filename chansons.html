@@ -87,20 +87,19 @@ currentList = aObj.parentNode.parentNode.id;
 	if ( player5.canPlayType ) {
 		audio5support = true;
 	}
-	//if (window.HTMLAudioElement) {
-	//alert(player5.src);
+
 	if (!audio5support)
 		PlayerOpen(fichier);
 	else{
 	   try {
 			player5.src = fichier;
 			player5.load();
-			hdlTimer = setTimeout(function() {veriv(fichier, 0,titre );}, 50);
+			hdlTimer = setTimeout(function() {veriv(fichier, 0,titre );}, 100);
 	   }
 		catch (e) {
 			// Fail silently but show in F12 developer tools console
 			 if(window.console && console.error("Error:" + e));
-				alert('Erreur'); //PlayerOpen(fichier);
+				alert('Erreur player'); //PlayerOpen(fichier);
 	   }
 	}
 }else{
@@ -309,50 +308,50 @@ Votre navigateur ne supporte pas cet element audio, essayons une autre option...
 <li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/lmw3igtc1ua9mau/Alys%20Robi%20-%20Tico-Tico%20-%201942.mp3?dl=1','Tito-Tito'); return false;">Alys Robi - Tito-Tito - 1942</a></li>
 <li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/ltef1983bo317uj/Bing%20Crosby%20-%20Swinging%20On%20A%20Star.mp3?dl=1','Swinging On A Star'); return false;">Bing Crosby - Swinging On A Star - 1943</a></li>
 <li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/id1l33ftwaqv0xa/Alys%20Robi%20-%20Besame%20Mucho%20-%201944.mp3?dl=1','Besame Mucho'); return false;">Alys Robi - Besame Mucho - 1944</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Tommy Dorsey - Boogie Woogie - 1945.mp3','Boogie Woogie'); return false;">Tommy Dorsey - Boogie Woogie - 1945</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - la_vie_en_rose.mp3','La vie en rose'); return false;">&Eacute;dith Piaf - La vie en rose - 1946</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles Trenet - La mer - 1946.mp3','La mer'); return false;">Charles Trenet - La mer - 1946</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Yves Montand - Jacques Prévert - Les feuilles mortes - 1946.mp3','Les feuilles mortes'); return false;">Yves Montand - Jacques Prévert - Les feuilles mortes - 1946</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Louis Armstrong - C_est si bon - 1947.mp3','C\'est si bon'); return false;">Louis Armstrong - C&apos;est si bon - 1947</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Pee Wee Hunt - Twelfth Street Rag - 1948.mp3','Twelfth Street Rag'); return false;">Pee Wee Hunt - Twelfth Street Rag - 1948</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Hymne a l_amour.mp3','Hymne &agrave; l\'amour'); return false;">&Eacute;dith Piaf - Hymne &agrave; l&apos;amour - 1950</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Nat King Cole - Mona Lisa - 1950.mp3','Mona Lisa'); return false;">Nat King Cole - Mona Lisa - 1950</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles Trenet - L_ame des poetes - 1951.mp3','L\'âme des po&egrave;tes'); return false;">Charles Trenet - L&apos;&acirc;me des po&egrave;tes - 1951</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/F&eacute;lix Leclerc - Moi mes souliers - 1951.mp3','Moi mes souliers'); return false;">F&eacute;lix Leclerc - Moi mes souliers - 1951</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Luis Mariano - Mexico - 1951.mp3','Mexico'); return false;">Luis Mariano - Mexico - 1951</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Padam Padam .mp3','Padam Padam '); return false;">&Eacute;dith Piaf - Padam Padam - 1951</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Line Renaud - Ma p_tite folie - 1952.mp3','Ma p\'tite folie'); return false;">Line Renaud - Ma p&apos;tite folie - 1952</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Leroy Anderson - Blue Tango - 1952.mp3','Blue Tango'); return false;">Leroy Anderson - Blue Tango - 1952</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Percy Faith Orch - Moulin Rouge 1953.mp3','Moulin Rouge'); return false;">Percy Faith - Moulin Rouge - 1953</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Le Goulante de pauvre Jean.mp3','Le Goulante de pauvre Jean'); return false;">&Eacute;dith Piaf - Le Goulante de pauvre Jean - 1954</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Sous le ciel de Paris.mp3','Sous le ciel de Paris'); return false;">&Eacute;dith Piaf - Sous le ciel de Paris - 1954</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Ella Fitzgerald - Summertime - 1955.mp3','Summertime'); return false;">Ella Fitzgerald - Summertime - 1955</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Danielle Darieux  - Le Temps Du Muguet - 1955.mp3','Le temps du muguet'); return false;">Danielle Darieux  - Le temps du muguet - 1955</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Perez Prado - Cherry Pink and Apple Blossom White -  1955.mp3','Cherry Pink and Apple Blossom White'); return false;">Perez Prado - Cherry Pink and Apple Blossom White -  1955</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Doris Day - Whatever Will Be Will Be (Que Sera Sera) - 1956.mp3','Que Sera Sera'); return false;">Doris Day - Que Sera Sera - 1956</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Raymond Lévesque - Quand les hommes vivront d amour - 1956.mp3','Quand les hommes vivront d\'amour'); return false;">Raymond Lévesque - Quand les hommes vivront d&apos;amour - 1956</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/elvispresley-heartbreakhotel - 1956.mp3','Heartbreak Hotel'); return false;">Elvis Presley - Heartbreak Hotel - 1956</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Elvis Presley - All Shook Up - 1957.mp3','All Shook Up'); return false;">Elvis Presley - All Shook Up - 1957</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Les compagnons de la chanson - Nick Nack Paddy Whack - 1957.mp3','Nick Nack Paddy Whack'); return false;">Les compagnons de la chanson - Nick Nack Paddy Whack - 1957</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Pat Boone - Love Letters In the Sand - 1957.mp3','Love Letters in the Sand'); return false;">Pat Boone - Love Letters In the Sand - 1957</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Patachou - Sous Les Ponts De Paris - 1958.mp3','Sous les ponts de Paris'); return false;">Patachou - Sous les ponts de Paris - 1958</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Everly Brothers - All I Have To Do Is Dream - 1958.mp3','All I Have To Do Is Dream'); return false;">Everly Brothers - All I Have To Do Is Dream - 1958</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Domenico_Modugno-Volare - 1958.mp3','Volare'); return false;">Domenico Modugno - Volare - 1958</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith piaf - Mon manege a moi.mp3','Mon man&egrave;ge &agrave; moi'); return false;">&Eacute;dith Piaf - Mon man&egrave;ge &agrave; moi - 1958</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Lloyd Price-Personality - 1959.mp3','Personality'); return false;">Lloyd Price - Personality - 1959</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Bourvil - Salade de Fruits - 1959.mp3','Salade de fruits'); return false;">Bourvil - Salade de fruits - 1959</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Paul Anka - Lonely Boy - 1959.mp3','Lonely Boy'); return false;">Paul Anka - Lonely Boy - 1959</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Milord.mp3',''); return false;">&Eacute;dith Piaf - Milord - 1959</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Frankie Avalon - Venus - 1959.mp3','Venus'); return false;">Frankie Avalon - Venus - 1959</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Bobby Darin - Mack the Knife - 1959.mp3','Mack the Knife'); return false;">Bobby Darin - Mack the Knife - 1959</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Clauce L&eacute;veill&eacute;e - Fr&eacute;d&eacute;ric - 1960.mp3','Fr&eacute;d&eacute;ric'); return false;">Clauce L&eacute;veill&eacute;e - Fr&eacute;d&eacute;ric - 1960</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Petula Clark - Sailor - 1960.mp3','Sailor'); return false;">Petula Clark - Sailor - 1960</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles aznavour - Je M_voyais D&eacute;j&agrave; - 1960.mp3','Je M\'voyais D&eacute;j&agrave;'); return false;">Charles Aznavour - Je M'voyais D&eacute;j&agrave; - 1960</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith_Piaf_-_C_est_l_amour.mp3',' C\'est l\'amour '); return false;">&Eacute;dith Piaf - C'est l&apos;amour - 1960</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Clauce L&eacute;veill&eacute;e - Les Vieux Pianos - 1960.mp3','Les Vieux Pianos'); return false;">Clauce L&eacute;veill&eacute;e - Les Vieux Pianos - 1960</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Edith Piaf - Non, je ne regrette rien.mp3','Non, je ne regrette rien'); return false;">&Eacute;dith Piaf - Non, je ne regrette rien - 1961</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Charles aznavour - Les Com&eacute;diens - 1961.mp3','Les Com&eacute;diens'); return false;">Charles Aznavour - Les Com&eacute;diens - 1961</a></li>
-<li class="songItem"><a href="#" onclick="playsong(this,'Music/Frida Boccara - Cherbourg avait raison - 1961.mp3','Cherbourg avait raison'); return false;">Frida Boccara - Cherbourg avait raison - 1961</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/uf8thv5xxzlw7yu/Tommy%20Dorsey%20-%20Boogie%20Woogie%20-%201945.mp3?dl=1','Boogie Woogie'); return false;">Tommy Dorsey - Boogie Woogie - 1945</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/g3q4u66nkmtqg1f/Edith%20Piaf%20-%20la_vie_en_rose.mp3?dl=1','La vie en rose'); return false;">&Eacute;dith Piaf - La vie en rose - 1946</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/rwd9cx93ixkjqmq/Charles%20Trenet%20-%20La%20mer%20-%201946.mp3?dl=1','La mer'); return false;">Charles Trenet - La mer - 1946</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/mclzcue0flvvtgk/Yves%20Montand%20-%20Jacques%20Pr%C3%A9vert%20-%20Les%20feuilles%20mortes%20-%201946.mp3?dl=1','Les feuilles mortes'); return false;">Yves Montand - Jacques Prévert - Les feuilles mortes - 1946</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/l24fzr9553i1898/Louis%20Armstrong%20-%20C_est%20si%20bon%20-%201947.mp3?dl=1','C\'est si bon'); return false;">Louis Armstrong - C&apos;est si bon - 1947</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/lrujur594gluvhu/Pee%20Wee%20Hunt%20-%20Twelfth%20Street%20Rag%20-%201948.mp3?dl=1','Twelfth Street Rag'); return false;">Pee Wee Hunt - Twelfth Street Rag - 1948</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/cmxy4524ddcu6yj/Edith%20Piaf%20-%20Hymne%20a%20l_amour.mp3?dl=1','Hymne &agrave; l\'amour'); return false;">&Eacute;dith Piaf - Hymne &agrave; l&apos;amour - 1950</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/29jx5e0su4b0agu/Nat%20King%20Cole%20-%20Mona%20Lisa%20-%201950.mp3?dl=1','Mona Lisa'); return false;">Nat King Cole - Mona Lisa - 1950</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/g38fjytgt44vxpp/Charles%20Trenet%20-%20L_ame%20des%20poetes%20-%201951.mp3?dl=1','L\'âme des po&egrave;tes'); return false;">Charles Trenet - L&apos;&acirc;me des po&egrave;tes - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/0wilm7opfcs3p2q/F%C3%A9lix%20Leclerc%20-%20Moi%20mes%20souliers%20-%201951.mp3?dl=1','Moi mes souliers'); return false;">F&eacute;lix Leclerc - Moi mes souliers - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/uaa1b37e8yxi1x5/Luis%20Mariano%20-%20Mexico%20-%201951.mp3?dl=1','Mexico'); return false;">Luis Mariano - Mexico - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/f1f1gczdbf3pxx0/Edith%20Piaf%20-%20Padam%20Padam%20.mp3?dl=1','Padam Padam '); return false;">&Eacute;dith Piaf - Padam Padam - 1951</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/j6wjgn8fj10rt7g/Line%20Renaud%20-%20Ma%20p_tite%20folie%20-%201952.mp3?dl=1','Ma p\'tite folie'); return false;">Line Renaud - Ma p&apos;tite folie - 1952</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/mp2md2icskfn30g/Leroy%20Anderson%20-%20Blue%20Tango%20-%201952.mp3?dl=1','Blue Tango'); return false;">Leroy Anderson - Blue Tango - 1952</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/sqkwyuvxzcm6fhv/Percy%20Faith%20Orch%20-%20Moulin%20Rouge%201953.mp3?dl=1','Moulin Rouge'); return false;">Percy Faith - Moulin Rouge - 1953</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/ea14m6x2f75jjey/Edith%20Piaf%20-%20Le%20Goulante%20de%20pauvre%20Jean.mp3?dl=1','Le Goulante de pauvre Jean'); return false;">&Eacute;dith Piaf - Le Goulante de pauvre Jean - 1954</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/xm8phvmdn3emqu5/Edith%20Piaf%20-%20Sous%20le%20ciel%20de%20Paris.mp3?dl=1','Sous le ciel de Paris'); return false;">&Eacute;dith Piaf - Sous le ciel de Paris - 1954</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/vl98qmh0q2lqub0/Ella%20Fitzgerald%20-%20Summertime%20-%201955.mp3?dl=1','Summertime'); return false;">Ella Fitzgerald - Summertime - 1955</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/h1segiepzq5dsfa/Danielle%20Darieux%20%20-%20Le%20Temps%20Du%20Muguet%20-%201955.mp3?dl=1','Le temps du muguet'); return false;">Danielle Darieux  - Le temps du muguet - 1955</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/6qoxo4l4mthok0f/Perez%20Prado%20-%20Cherry%20Pink%20and%20Apple%20Blossom%20White%20-%20%201955.mp3?dl=1','Cherry Pink and Apple Blossom White'); return false;">Perez Prado - Cherry Pink and Apple Blossom White -  1955</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/5y6bhy8oblcxudi/Doris%20Day%20-%20Whatever%20Will%20Be%20Will%20Be%20%28Que%20Sera%20Sera%29%20-%201956.mp3?dl=1','Que Sera Sera'); return false;">Doris Day - Que Sera Sera - 1956</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/077bmcss9scupyq/Raymond%20L%C3%A9vesque%20-%20Quand%20les%20hommes%20vivront%20d%20amour%20-%201956.mp3?dl=1','Quand les hommes vivront d\'amour'); return false;">Raymond Lévesque - Quand les hommes vivront d&apos;amour - 1956</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/apmvoqy269ug16w/elvispresley-heartbreakhotel%20-%201956.mp3?dl=1','Heartbreak Hotel'); return false;">Elvis Presley - Heartbreak Hotel - 1956</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/kelorbqudbn9tzm/Elvis%20Presley%20-%20All%20Shook%20Up%20-%201957.mp3?dl=1','All Shook Up'); return false;">Elvis Presley - All Shook Up - 1957</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/sfq0jbns2xfo0n4/Les%20compagnons%20de%20la%20chanson%20-%20Nick%20Nack%20Paddy%20Whack%20-%201957.mp3?dl=1','Nick Nack Paddy Whack'); return false;">Les compagnons de la chanson - Nick Nack Paddy Whack - 1957</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/8xpsl4ct4oawooy/Pat%20Boone%20-%20Love%20Letters%20In%20the%20Sand%20-%201957.mp3?dl=1','Love Letters in the Sand'); return false;">Pat Boone - Love Letters In the Sand - 1957</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/ffspmk8a33wop33/Patachou%20-%20Sous%20Les%20Ponts%20De%20Paris%20-%201958.mp3?dl=1','Sous les ponts de Paris'); return false;">Patachou - Sous les ponts de Paris - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/vz79rtjoxh3wgmz/Everly%20Brothers%20-%20All%20I%20Have%20To%20Do%20Is%20Dream%20-%201958.mp3?dl=1','All I Have To Do Is Dream'); return false;">Everly Brothers - All I Have To Do Is Dream - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/x2jwzuutrlf0edh/Domenico_Modugno-Volare%20-%201958.mp3?dl=1','Volare'); return false;">Domenico Modugno - Volare - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/184555rp2um8muk/Edith%20piaf%20-%20Mon%20manege%20a%20moi.mp3?dl=1','Mon man&egrave;ge &agrave; moi'); return false;">&Eacute;dith Piaf - Mon man&egrave;ge &agrave; moi - 1958</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/cky827pt2n7rd93/Lloyd%20Price-Personality%20-%201959.mp3?dl=1','Personality'); return false;">Lloyd Price - Personality - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/ltoglf07kkw52xl/Bourvil%20-%20Salade%20de%20Fruits%20-%201959.mp3?dl=1','Salade de fruits'); return false;">Bourvil - Salade de fruits - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/li9th1jrrb9fq5g/Paul%20Anka%20-%20Lonely%20Boy%20-%201959.mp3?dl=1','Lonely Boy'); return false;">Paul Anka - Lonely Boy - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/mn977qslxkavdv5/Edith%20Piaf%20-%20Milord.mp3?dl=1',''); return false;">&Eacute;dith Piaf - Milord - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/29pkjpjflnjql7p/Frankie%20Avalon%20-%20Venus%20-%201959.mp3?dl=1','Venus'); return false;">Frankie Avalon - Venus - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/kgeyculf38sfdmp/Bobby%20Darin%20-%20Mack%20the%20Knife%20-%201959.mp3?dl=1','Mack the Knife'); return false;">Bobby Darin - Mack the Knife - 1959</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/u367nitiwk4n8v2/Clauce%20L%C3%A9veill%C3%A9e%20-%20Fr%C3%A9d%C3%A9ric%20-%201960.mp3?dl=1','Fr&eacute;d&eacute;ric'); return false;">Clauce L&eacute;veill&eacute;e - Fr&eacute;d&eacute;ric - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/ob3a73taih74ktf/Petula%20Clark%20-%20Sailor%20-%201960.mp3?dl=1','Sailor'); return false;">Petula Clark - Sailor - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/sf0qeykv6iipoak/Charles%20aznavour%20-%20Je%20M_voyais%20D%C3%A9j%C3%A0%20-%201960.mp3?dl=1','Je M\'voyais D&eacute;j&agrave;'); return false;">Charles Aznavour - Je M'voyais D&eacute;j&agrave; - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/s0d64mwnxhhu2ml/Edith_Piaf_-_C_est_l_amour.mp3?dl=1',' C\'est l\'amour '); return false;">&Eacute;dith Piaf - C'est l&apos;amour - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/a4sjxbctcervekx/Clauce%20L%C3%A9veill%C3%A9e%20-%20Les%20Vieux%20Pianos%20-%201960.mp3?dl=1','Les Vieux Pianos'); return false;">Clauce L&eacute;veill&eacute;e - Les Vieux Pianos - 1960</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/p4uid4uqmkck709/Edith%20Piaf%20-%20Non%2C%20je%20ne%20regrette%20rien.mp3?dl=1','Non, je ne regrette rien'); return false;">&Eacute;dith Piaf - Non, je ne regrette rien - 1961</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/8qb0iwdgj21tis7/Charles%20aznavour%20-%20Les%20Com%C3%A9diens%20-%201961.mp3?dl=1','Les Com&eacute;diens'); return false;">Charles Aznavour - Les Com&eacute;diens - 1961</a></li>
+<li class="songItem"><a href="#" onclick="playsong(this,'https://www.dropbox.com/s/o6w2p5jewspfya9/Frida%20Boccara%20-%20Cherbourg%20avait%20raison%20-%201961.mp3?dl=1','Cherbourg avait raison'); return false;">Frida Boccara - Cherbourg avait raison - 1961</a></li>
 
 </ul>
 </br>
