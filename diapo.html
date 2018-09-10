@@ -20,6 +20,13 @@ function testaudio(){
 var objMovie = document.getElementById('objMovie');
 var mpeg4, canPlay;
 
+
+objMovie.onplay  = function() {
+	var chargement = document.getElementById('chargement');
+	chargement.style.visibility = "hidden";
+    //alert("Can start playing video");
+}; 
+
 initPage();
 
    var canPlay = false;
@@ -42,6 +49,10 @@ objMovie.play();
 objMovie.parentNode.removeChild(objMovie);
 }
 
+}
+
+function failed(e){
+alert(e);
 }
 
 
@@ -80,14 +91,19 @@ objMovie.parentNode.removeChild(objMovie);
 <div id="centrer">
 <div id="imgDesc">Pr&eacute;sentation au d&eacute;but du souper</div>
 
+<div id="chargement" class="">
+<div class="charge">Chargement</div><div class="charge loading"></div></div>
+
 <video id="objMovie" preload  onerror="failed(event)">
 	<source src="https://www.dropbox.com/s/jtdi9n9w02rqjq2/Rachel80.mp4?dl=1" type='video/mp4;' onerror="failed(event)"/>
 </video>
 
-</br>
+</br></br>
 <a target="_blank" href="texte.html">Texte du diaporama</a>
 </br></br>
-T&eacute;l&eacute;charger:
+<a target="_blank" href="texte_Mely.html">T&eacute;moignage de M&eacute;lissa</a>
+</br></br>
+T&eacute;l&eacute;charger le diaporama:
 </br>
 <a target="_blank" href="https://www.dropbox.com/s/jtdi9n9w02rqjq2/Rachel80.mp4?dl=1">.mp4 480x320 46 Mo</a>
 </br>
@@ -102,7 +118,7 @@ T&eacute;l&eacute;charger:
     <!--<video src="misc/video_diapo.mp4" controls></video> // -->
 </div>
 </div>  <!--End content // -->
-
+</br></br>
 <div id="piedPage">
 16 f&eacute;vrier 2014
 </div>
