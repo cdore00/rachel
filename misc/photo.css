@@ -378,6 +378,53 @@ margin-left:10%;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
 }
 
+	@-webkit-keyframes color {
+		0%, 100% { background: hsla(240,95%,65%,0.5); }
+			 50% { background: hsla(240,95%,35%,0.5); }
+	}
+	@-moz-keyframes color {
+		0%, 1%, 99%, 100% { background: hsla(240,95%,65%,0.5); }
+			 50% { background: hsla(240,95%,35%,0.5); }
+	}
+	.loading {
+		margin: 1em;
+		position: relative;
+		-webkit-animation-delay: .4s;
+		-moz-animation-delay: .4s;
+	}
+	.loading, .loading::before, .loading::after {
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background: hsla(240,95%,65%,0.5);
+		-webkit-animation: color .5s infinite;
+		   -moz-animation: color .5s infinite;
+	}
+	.loading::before, .loading::after {
+	    content: "";
+		position: absolute;
+	}
+	.loading::before {
+	    left: -150%;
+		-webkit-animation-delay: .4s;
+		-moz-animation-delay: .4s;
+	}
+	.loading::after {
+	    right: -150%;
+		-webkit-animation-delay: .2s;
+		-moz-animation-delay: .2s;
+	}
+
+#chargement{
+display: inline-block;
+font-size: 15pt;
+}
+
+.charge{
+display: inline-block;
+margin: 0;
+margin-left: 1em;
+}
 
 
 /* for 480px or less */ 
